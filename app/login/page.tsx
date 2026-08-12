@@ -1,12 +1,9 @@
-```tsx
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
-  const router = useRouter();
   const supabase = createClient();
 
   const [email, setEmail] = useState("info@kabadibaba.com");
@@ -77,10 +74,9 @@ export default function LoginPage() {
               onChange={(event) => setEmail(event.target.value)}
               autoComplete="email"
               inputMode="email"
-              enterKeyHint="next"
               placeholder="info@kabadibaba.com"
               disabled={loading}
-              className="min-h-[48px] w-full touch-manipulation rounded-lg border border-gray-300 p-3 text-base outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200 disabled:bg-gray-100"
+              className="min-h-[48px] w-full rounded-lg border border-gray-300 p-3 text-base outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 disabled:bg-gray-100"
             />
           </div>
 
@@ -99,11 +95,9 @@ export default function LoginPage() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               autoComplete="current-password"
-              inputMode="text"
-              enterKeyHint="done"
               placeholder="Enter admin password"
               disabled={loading}
-              className="min-h-[48px] w-full touch-manipulation rounded-lg border border-gray-300 p-3 text-base outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200 disabled:bg-gray-100"
+              className="min-h-[48px] w-full rounded-lg border border-gray-300 p-3 text-base outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 disabled:bg-gray-100"
             />
           </div>
 
@@ -119,7 +113,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="min-h-[48px] w-full touch-manipulation rounded-lg bg-green-600 py-3 font-medium text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60"
+            className="min-h-[48px] w-full rounded-lg bg-green-600 py-3 font-medium text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
@@ -128,4 +122,3 @@ export default function LoginPage() {
     </div>
   );
 }
-```
