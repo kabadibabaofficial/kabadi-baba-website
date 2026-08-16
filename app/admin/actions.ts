@@ -43,3 +43,38 @@ export async function deleteBooking(id: string) {
 
   revalidatePath("/admin");
 }
+
+/* ================================
+   SCRAP RATE UPDATE
+================================ */
+
+export async function updateScrapRate(
+  id: string,
+  rate: number
+) {
+  const supabase = await createClient();
+
+  if (!id) {
+    throw new Error("Rate ID is required.");
+  }
+
+  if (!Number.isFinite(rate) || rate < 0) {
+    throw new Error("Please enter a valid rate.");
+  }
+
+  const { error } = await supabase
+    .from("scrap_rates")
+    .update({
+      rate,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id);
+
+  if (error) {
+    console.error("Update Scrap Rate Error:", error);
+    throw new Error(error.message);
+  }
+
+  revalidatePath("/admin");
+  revalidatePath("/");
+}

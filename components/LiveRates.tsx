@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 type Category =
   | "All"
@@ -12,89 +13,12 @@ type Category =
   | "Other";
 
 type RateItem = {
+  id: string;
   name: string;
-  rate: string;
+  rate: number;
   unit: "kg" | "pc";
   category: Exclude<Category, "All">;
 };
-
-const rates: RateItem[] = [
-  // PAPER
-  { name: "Newspaper", rate: "10", unit: "kg", category: "Paper" },
-  { name: "Carton", rate: "10", unit: "kg", category: "Paper" },
-  { name: "Books", rate: "9", unit: "kg", category: "Paper" },
-  { name: "Grey Board", rate: "2", unit: "kg", category: "Paper" },
-  { name: "Copy Paper", rate: "10", unit: "kg", category: "Paper" },
-  { name: "Magazines", rate: "7", unit: "kg", category: "Paper" },
-  { name: "Record Paper", rate: "8", unit: "kg", category: "Paper" },
-  { name: "White Paper", rate: "8", unit: "kg", category: "Paper" },
-  { name: "Paper Tube", rate: "6", unit: "kg", category: "Paper" },
-
-  // PLASTIC
-  { name: "Mix Plastic", rate: "4", unit: "kg", category: "Plastic" },
-  { name: "Soft Plastic", rate: "10", unit: "kg", category: "Plastic" },
-  { name: "Hard Plastic", rate: "2", unit: "kg", category: "Plastic" },
-  { name: "Plastic Jar (15 Litre)", rate: "15", unit: "kg", category: "Plastic" },
-  { name: "Plastic Jar (5 Litre)", rate: "15", unit: "kg", category: "Plastic" },
-  { name: "Polythene Bags (LD)", rate: "8", unit: "kg", category: "Plastic" },
-  { name: "Plastic (PP) Bags", rate: "3", unit: "kg", category: "Plastic" },
-  { name: "PVC Pipe", rate: "5", unit: "kg", category: "Plastic" },
-  { name: "PET Bottle", rate: "15", unit: "kg", category: "Plastic" },
-  { name: "Water Tank (Sintex)", rate: "15", unit: "kg", category: "Plastic" },
-  { name: "Plastic Can (25 Litre)", rate: "15", unit: "kg", category: "Plastic" },
-  { name: "Plastic Can (50 Litre)", rate: "15", unit: "kg", category: "Plastic" },
-  { name: "Plastic Drum (200 Litre)", rate: "15", unit: "kg", category: "Plastic" },
-  { name: "Polythene Bags (HM)", rate: "10", unit: "kg", category: "Plastic" },
-  { name: "Packaging Film", rate: "0", unit: "kg", category: "Plastic" },
-
-  // METAL
-  { name: "Iron", rate: "24", unit: "kg", category: "Metal" },
-  { name: "Tin", rate: "20", unit: "kg", category: "Metal" },
-  { name: "Aluminium", rate: "155", unit: "kg", category: "Metal" },
-  { name: "Steel", rate: "45", unit: "kg", category: "Metal" },
-  { name: "Brass", rate: "410", unit: "kg", category: "Metal" },
-  { name: "Copper", rate: "650", unit: "kg", category: "Metal" },
-  { name: "Casting Aluminium", rate: "110", unit: "kg", category: "Metal" },
-  { name: "Beverage Cans (Aluminium)", rate: "110", unit: "kg", category: "Metal" },
-  { name: "Copper Wire", rate: "45", unit: "kg", category: "Metal" },
-  { name: "Aluminium Wire", rate: "20", unit: "kg", category: "Metal" },
-  { name: "MS Drum (200 Litre)", rate: "19", unit: "kg", category: "Metal" },
-  { name: "MS Drum (50 Litre)", rate: "20", unit: "kg", category: "Metal" },
-
-  // E-WASTE
-  { name: "E-Waste", rate: "15", unit: "kg", category: "E-Waste" },
-  { name: "Laptop", rate: "50", unit: "pc", category: "E-Waste" },
-  { name: "Computer CPU", rate: "200", unit: "pc", category: "E-Waste" },
-  { name: "Monitor (CRT)", rate: "180", unit: "pc", category: "E-Waste" },
-  { name: "Monitor (LCD/LED)", rate: "40", unit: "pc", category: "E-Waste" },
-  { name: "Printer", rate: "25", unit: "kg", category: "E-Waste" },
-  { name: "UPS (with battery)", rate: "220", unit: "pc", category: "E-Waste" },
-  { name: "UPS (without battery)", rate: "120", unit: "pc", category: "E-Waste" },
-  { name: "Microwave", rate: "18", unit: "kg", category: "E-Waste" },
-  { name: "Alkaline Battery", rate: "2", unit: "kg", category: "E-Waste" },
-  { name: "Inverter Battery", rate: "80", unit: "kg", category: "E-Waste" },
-
-  // APPLIANCES
-  { name: "Television (LCD/LED)", rate: "40", unit: "pc", category: "Appliances" },
-  { name: "Television (CRT)", rate: "40", unit: "pc", category: "Appliances" },
-  { name: "AC (1 Ton)", rate: "2000", unit: "pc", category: "Appliances" },
-  { name: "AC (1.5 Ton)", rate: "2500", unit: "pc", category: "Appliances" },
-  { name: "AC (2 Ton)", rate: "3000", unit: "pc", category: "Appliances" },
-  { name: "Washing Machine", rate: "500", unit: "pc", category: "Appliances" },
-  { name: "Refrigerator (Single Door)", rate: "400", unit: "pc", category: "Appliances" },
-  { name: "Refrigerator (Double Door)", rate: "600", unit: "pc", category: "Appliances" },
-  { name: "Geyser", rate: "15", unit: "kg", category: "Appliances" },
-  { name: "Cooler (Plastic/Fibre)", rate: "5", unit: "kg", category: "Appliances" },
-  { name: "Cooler (Tin)", rate: "15", unit: "kg", category: "Appliances" },
-
-  // OTHER
-  { name: "Tyre", rate: "3", unit: "kg", category: "Other" },
-  { name: "Fibre", rate: "5", unit: "kg", category: "Other" },
-  { name: "Milk Covers", rate: "0", unit: "kg", category: "Other" },
-  { name: "Bike", rate: "2000", unit: "pc", category: "Other" },
-  { name: "Car", rate: "8000", unit: "pc", category: "Other" },
-  { name: "Other Scrap", rate: "2", unit: "kg", category: "Other" },
-];
 
 const categories: Category[] = [
   "All",
@@ -106,11 +30,40 @@ const categories: Category[] = [
   "Other",
 ];
 
-const rupee = "\u20B9";
+const rupee = "₹";
 
 export default function LiveRates() {
+  const supabase = createClient();
+
+  const [rates, setRates] = useState<RateItem[]>([]);
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    const loadRates = async () => {
+      setLoading(true);
+      setErrorMessage("");
+
+      const { data, error } = await supabase
+        .from("scrap_rates")
+        .select("id, name, rate, unit, category")
+        .order("id", { ascending: true });
+
+      if (error) {
+        console.error("Error loading scrap rates:", error);
+        setErrorMessage("Rates load नहीं हो पाए। Please try again.");
+        setLoading(false);
+        return;
+      }
+
+      setRates((data || []) as RateItem[]);
+      setLoading(false);
+    };
+
+    loadRates();
+  }, []);
 
   const filteredRates = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -126,7 +79,7 @@ export default function LiveRates() {
 
       return categoryMatch && searchMatch;
     });
-  }, [activeCategory, search]);
+  }, [rates, activeCategory, search]);
 
   return (
     <section id="rates" className="bg-gray-50 py-16 sm:py-20">
@@ -187,83 +140,116 @@ export default function LiveRates() {
           })}
         </div>
 
-        {/* RESULT COUNT */}
-        <div className="mb-4 flex items-center justify-between">
-          <p className="text-sm font-medium text-gray-500">
-            {filteredRates.length} items available
-          </p>
-
-          {search && (
-            <button
-              type="button"
-              onClick={() => setSearch("")}
-              className="text-sm font-semibold text-emerald-700 hover:underline"
-            >
-              Clear search
-            </button>
-          )}
-        </div>
-
-        {/* RATE CARDS */}
-        {filteredRates.length > 0 ? (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-            {filteredRates.map((item) => (
-              <div
-                key={`${item.category}-${item.name}`}
-                className="group rounded-2xl border border-gray-100 bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg sm:p-5"
-              >
-                <div className="mb-3 flex items-start justify-between gap-2">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-lg">
-                    {item.category === "Paper" && "📄"}
-                    {item.category === "Plastic" && "♻️"}
-                    {item.category === "Metal" && "🔩"}
-                    {item.category === "E-Waste" && "💻"}
-                    {item.category === "Appliances" && "🏠"}
-                    {item.category === "Other" && "♻️"}
-                  </div>
-
-                  <span className="rounded-full bg-gray-50 px-2 py-1 text-[10px] font-medium text-gray-500">
-                    {item.category}
-                  </span>
-                </div>
-
-                <h3 className="min-h-[40px] text-sm font-bold leading-5 text-gray-900 sm:text-base">
-                  {item.name}
-                </h3>
-
-                <div className="mt-3">
-                  <span className="text-xl font-extrabold text-emerald-700 sm:text-2xl">
-                    {rupee}
-                    {item.rate}
-                  </span>
-
-                  <span className="ml-1 text-xs font-medium text-gray-500">
-                    /{item.unit}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
+        {/* LOADING */}
+        {loading && (
           <div className="rounded-2xl bg-white p-10 text-center shadow-sm">
-            <div className="text-4xl">🔎</div>
-            <h3 className="mt-3 text-lg font-bold text-gray-900">
-              No scrap item found
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              Try another item or category.
+            <div className="text-lg font-semibold text-gray-700">
+              Loading today&apos;s rates...
+            </div>
+
+            <p className="mt-2 text-sm text-gray-500">
+              Please wait.
             </p>
           </div>
         )}
 
-        {/* DISCLAIMER */}
-        <div className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 text-center">
-          <p className="text-xs leading-5 text-amber-800 sm:text-sm">
-            <strong>Note:</strong> Rates shown are indicative. Final rate is
-            confirmed after checking material quality, weight and current
-            market conditions.
-          </p>
-        </div>
+        {/* ERROR */}
+        {!loading && errorMessage && (
+          <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center">
+            <div className="text-lg font-bold text-red-700">
+              Rates load नहीं हो पाए
+            </div>
+
+            <p className="mt-2 text-sm text-red-600">
+              {errorMessage}
+            </p>
+          </div>
+        )}
+
+        {/* RESULTS */}
+        {!loading && !errorMessage && (
+          <>
+            {/* RESULT COUNT */}
+            <div className="mb-4 flex items-center justify-between">
+              <p className="text-sm font-medium text-gray-500">
+                {filteredRates.length} items available
+              </p>
+
+              {search && (
+                <button
+                  type="button"
+                  onClick={() => setSearch("")}
+                  className="text-sm font-semibold text-emerald-700 hover:underline"
+                >
+                  Clear search
+                </button>
+              )}
+            </div>
+
+            {/* RATE CARDS */}
+            {filteredRates.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+                {filteredRates.map((item) => (
+                  <div
+                    key={`${item.category}-${item.name}-${item.id}`}
+                    className="group rounded-2xl border border-gray-100 bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg sm:p-5"
+                  >
+                    <div className="mb-3 flex items-start justify-between gap-2">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-lg">
+                        {item.category === "Paper" && "📄"}
+                        {item.category === "Plastic" && "♻️"}
+                        {item.category === "Metal" && "🔩"}
+                        {item.category === "E-Waste" && "💻"}
+                        {item.category === "Appliances" && "🏠"}
+                        {item.category === "Other" && "♻️"}
+                      </div>
+
+                      <span className="rounded-full bg-gray-50 px-2 py-1 text-[10px] font-medium text-gray-500">
+                        {item.category}
+                      </span>
+                    </div>
+
+                    <h3 className="min-h-[40px] text-sm font-bold leading-5 text-gray-900 sm:text-base">
+                      {item.name}
+                    </h3>
+
+                    <div className="mt-3">
+                      <span className="text-xl font-extrabold text-emerald-700 sm:text-2xl">
+                        {rupee}
+                        {item.rate}
+                      </span>
+
+                      <span className="ml-1 text-xs font-medium text-gray-500">
+                        /{item.unit}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-2xl bg-white p-10 text-center shadow-sm">
+                <div className="text-4xl">🔎</div>
+
+                <h3 className="mt-3 text-lg font-bold text-gray-900">
+                  No scrap item found
+                </h3>
+
+                <p className="mt-1 text-sm text-gray-500">
+                  Try another item or category.
+                </p>
+              </div>
+            )}
+
+            {/* DISCLAIMER */}
+            <div className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 text-center">
+              <p className="text-xs leading-5 text-amber-800 sm:text-sm">
+                <strong>Note:</strong> Rates shown are indicative. Final rate
+                is confirmed after checking material quality, weight and
+                current market conditions.
+              </p>
+            </div>
+          </>
+        )}
 
       </div>
     </section>

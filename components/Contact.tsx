@@ -4,89 +4,115 @@ import { Phone, MapPin, Mail, Clock } from "lucide-react";
 
 export default function Contact() {
   return (
-    <>
-      <section id="contact" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
+    <section
+      id="contact"
+      className="bg-white py-16 sm:py-20"
+    >
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
-          <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-gray-900">
-              Contact Us
-            </h2>
+        {/* HEADER */}
+        <div className="mb-10 text-center sm:mb-12">
+          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+            Contact Us
+          </h2>
 
-            <p className="text-gray-600 mt-4">
-              हमसे संपर्क करें या WhatsApp पर तुरंत Pickup बुक करें।
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-10">
-
-            <div className="space-y-6">
-
-              <div className="flex gap-4">
-                <Phone className="text-green-600 w-6 h-6 mt-1" />
-                <div>
-                  <h3 className="font-bold">Phone</h3>
-                  <p>+91 7377788810</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <Mail className="text-green-600 w-6 h-6 mt-1" />
-                <div>
-                  <h3 className="font-bold">Email</h3>
-                  <p>info@kabadibaba.in</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <MapPin className="text-green-600 w-6 h-6 mt-1" />
-                <div>
-                  <h3 className="font-bold">Address</h3>
-                  <p>Gorakhpur, Uttar Pradesh</p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <Clock className="text-green-600 w-6 h-6 mt-1" />
-                <div>
-                  <h3 className="font-bold">Working Hours</h3>
-                  <p>9:00 AM - 7:00 PM</p>
-                </div>
-              </div>
-
-            </div>
-
-            <div className="rounded-3xl overflow-hidden shadow-lg">
-
-              <iframe
-                src="https://www.google.com/maps?q=Gorakhpur&output=embed"
-                width="100%"
-                height="350"
-                loading="lazy"
-              />
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      <footer className="bg-green-600 text-white py-6">
-
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-
-          <h3 className="font-bold text-xl">
-            Kabadi Baba
-          </h3>
-
-          <p>
-            © 2026 Kabadi Baba. All Rights Reserved.
+          <p className="mt-4 text-sm text-gray-600 sm:text-base">
+            हमसे संपर्क करें या WhatsApp पर तुरंत Pickup बुक करें।
           </p>
-
         </div>
 
-      </footer>
-    </>
+        {/* CONTACT DETAILS + MAP */}
+        <div className="grid gap-8 md:grid-cols-2 md:gap-10">
+
+          {/* CONTACT DETAILS */}
+          <div className="space-y-6">
+
+            {/* PHONE */}
+            <div className="flex gap-4">
+              <Phone className="mt-1 h-6 w-6 shrink-0 text-green-600" />
+
+              <div>
+                <h3 className="font-bold text-gray-900">
+                  Phone
+                </h3>
+
+                <a
+                  href="tel:+917377788810"
+                  className="text-gray-600 transition hover:text-green-600"
+                >
+                  +91 7377788810
+                </a>
+              </div>
+            </div>
+
+            {/* EMAIL */}
+            <div className="flex gap-4">
+              <Mail className="mt-1 h-6 w-6 shrink-0 text-green-600" />
+
+              <div>
+                <h3 className="font-bold text-gray-900">
+                  Email
+                </h3>
+
+                <a
+                  href="mailto:info@kabadibaba.com"
+                  className="text-gray-600 transition hover:text-green-600"
+                >
+                  info@kabadibaba.com
+                </a>
+              </div>
+            </div>
+
+            {/* ADDRESS */}
+            <div className="flex gap-4">
+              <MapPin className="mt-1 h-6 w-6 shrink-0 text-green-600" />
+
+              <div>
+                <h3 className="font-bold text-gray-900">
+                  Address
+                </h3>
+
+                <p className="leading-6 text-gray-600">
+                  216K, Ram Janki Nagar,
+                  <br />
+                  Kaushalpuram, Bashratpur,
+                  <br />
+                  Gorakhpur, Uttar Pradesh
+                </p>
+              </div>
+            </div>
+
+            {/* WORKING HOURS */}
+            <div className="flex gap-4">
+              <Clock className="mt-1 h-6 w-6 shrink-0 text-green-600" />
+
+              <div>
+                <h3 className="font-bold text-gray-900">
+                  Working Hours
+                </h3>
+
+                <p className="text-gray-600">
+                  9:00 AM - 7:00 PM
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          {/* GOOGLE MAP */}
+          <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-gray-100">
+            <iframe
+              src="https://www.google.com/maps?q=26.7904735,83.3698636&output=embed"
+              width="100%"
+              height="350"
+              loading="lazy"
+              title="Kabadi Baba Location"
+              className="border-0"
+            />
+          </div>
+
+        </div>
+      </div>
+    </section>
   );
 }

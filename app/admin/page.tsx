@@ -1,6 +1,8 @@
 import { getBookings, getDashboardStats } from "./data";
 import { DashboardCards } from "@/components/admin/DashboardCards";
 import BookingsTable from "@/components/admin/BookingsTable";
+import RateManager from "@/components/admin/RateManager";
+import { createClient } from "@/lib/supabase/server";
 
 interface Props {
   searchParams: Promise<{
@@ -27,19 +29,41 @@ export default async function AdminPage({
     ? (status as (typeof validStatuses)[number])
     : undefined;
 
-  const [bookings, stats] = await Promise.all([
+  const supabase = await createClient();
+
+  const [bookings, stats, ratesResult] = await Promise.all([
     getBookings(q, selectedStatus),
     getDashboardStats(),
+    supabase
+      .from("scrap_rates")
+      .select("id, name, rate, unit, category")
+      .order("id", { ascending: true }),
   ]);
+
+  if (ratesResult.error) {
+    console.error(
+      "Error fetching scrap rates:",
+      ratesResult.error
+    );
+  }
+
+  const rates = ratesResult.data ?? [];
 
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="mx-auto max-w-7xl p-6">
+
+        {/* PAGE TITLE */}
         <h1 className="mb-8 text-4xl font-bold text-green-600">
           Kabadi Baba Admin Dashboard
         </h1>
 
+        {/* DASHBOARD STATS */}
         <DashboardCards stats={stats} />
+
+        {/* ========================================
+            CUSTOMER SEARCH / FILTER
+        ======================================== */}
 
         <form
           method="GET"
@@ -82,7 +106,18 @@ export default async function AdminPage({
           </div>
         </form>
 
+        {/* ========================================
+            CUSTOMER DETAILS / BOOKINGS
+        ======================================== */}
+
         <BookingsTable bookings={bookings} />
+
+        {/* ========================================
+            KABADI RATES - LAST
+        ======================================== */}
+
+        <RateManager initialRates={rates} />
+
       </div>
     </div>
   );
