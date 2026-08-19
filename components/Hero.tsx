@@ -14,7 +14,7 @@ export default function Hero() {
       id="home"
       className="relative overflow-hidden bg-gradient-to-br from-[#f0fdf4] via-white to-[#ecfdf5]"
     >
-      <div className="mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-10 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:gap-12 lg:px-8 lg:py-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-10 sm:px-8 sm:py-12 lg:grid-cols-2 lg:gap-12 lg:px-8 lg:py-16">
 
         {/* LEFT CONTENT */}
         <div className="relative z-10">
@@ -26,7 +26,7 @@ export default function Hero() {
           </div>
 
           {/* Heading */}
-          <h1 className="mt-6 max-w-2xl text-4xl font-extrabold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mt-5 max-w-2xl text-4xl font-extrabold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
             गोरखपुर का
             <br />
             <span className="text-green-600">
@@ -37,7 +37,7 @@ export default function Hero() {
           </h1>
 
           {/* Description */}
-          <p className="mt-6 max-w-xl text-base leading-7 text-gray-600 sm:text-lg sm:leading-8 md:text-xl">
+          <p className="mt-5 max-w-xl text-base leading-7 text-gray-600 sm:text-lg sm:leading-8 md:text-xl">
             घर बैठे अपना पुराना अखबार, लोहा, प्लास्टिक, ई-वेस्ट और अन्य
             कबाड़ बेचें।
             <br />
@@ -48,11 +48,11 @@ export default function Hero() {
           </p>
 
           {/* CTA BUTTONS */}
-          <div className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4">
+          <div className="mt-7 flex flex-wrap gap-3 sm:mt-8 sm:gap-4">
 
             <a
               href="#booking"
-              className="inline-flex items-center gap-2 rounded-xl bg-green-600 px-6 py-3 font-bold text-white shadow-lg shadow-green-600/20 transition duration-300 hover:-translate-y-1 hover:bg-green-700 sm:px-8 sm:py-4"
+              className="inline-flex items-center gap-2 rounded-xl bg-green-600 px-5 py-3 font-bold text-white shadow-lg shadow-green-600/20 transition duration-300 hover:-translate-y-1 hover:bg-green-700 sm:px-8 sm:py-4"
             >
               <Truck size={20} />
               Book Pickup
@@ -62,7 +62,7 @@ export default function Hero() {
               href="https://wa.me/917377788810"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-6 py-3 font-bold text-white shadow-lg transition duration-300 hover:-translate-y-1 hover:bg-[#1EBE5D] sm:px-8 sm:py-4"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 font-bold text-white shadow-lg transition duration-300 hover:-translate-y-1 hover:bg-[#1EBE5D] sm:px-8 sm:py-4"
             >
               <MessageCircle size={20} />
               WhatsApp
@@ -70,7 +70,7 @@ export default function Hero() {
 
             <a
               href="tel:+917377788810"
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-green-600 px-6 py-3 font-bold text-green-700 transition duration-300 hover:-translate-y-1 hover:bg-green-600 hover:text-white sm:px-8 sm:py-4"
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-green-600 px-5 py-3 font-bold text-green-700 transition duration-300 hover:-translate-y-1 hover:bg-green-600 hover:text-white sm:px-8 sm:py-4"
             >
               <Phone size={20} />
               Call Now
@@ -79,7 +79,7 @@ export default function Hero() {
           </div>
 
           {/* TRUST FEATURES */}
-          <div className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4">
+          <div className="mt-7 flex flex-wrap gap-3 sm:mt-8 sm:gap-4">
 
             <div className="flex items-center gap-2 rounded-full border border-green-100 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm sm:px-4 sm:text-base">
               <Truck className="text-green-600" size={18} />
@@ -118,7 +118,6 @@ export default function Hero() {
                 className="object-cover object-center"
               />
 
-              {/* Image gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
             </div>
