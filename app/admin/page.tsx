@@ -2,6 +2,7 @@ import { getBookings, getDashboardStats } from "./data";
 import { DashboardCards } from "@/components/admin/DashboardCards";
 import BookingsTable from "@/components/admin/BookingsTable";
 import RateManager from "@/components/admin/RateManager";
+import LogoutButton from "@/components/admin/LogoutButton";
 import { createClient } from "@/lib/supabase/server";
 
 interface Props {
@@ -53,10 +54,14 @@ export default async function AdminPage({
     <div className="min-h-screen bg-gray-100">
       <div className="mx-auto max-w-7xl p-6">
 
-        {/* PAGE TITLE */}
-        <h1 className="mb-8 text-4xl font-bold text-green-600">
-          Kabadi Baba Admin Dashboard
-        </h1>
+        {/* PAGE TITLE + LOGOUT */}
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="text-4xl font-bold text-green-600">
+            Kabadi Baba Admin Dashboard
+          </h1>
+
+          <LogoutButton />
+        </div>
 
         {/* DASHBOARD STATS */}
         <DashboardCards stats={stats} />
