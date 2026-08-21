@@ -22,24 +22,24 @@ export default function Hero() {
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-xs font-bold text-green-800 shadow-sm ring-1 ring-green-200 sm:px-5 sm:text-sm">
             <ShieldCheck size={18} className="text-green-600" />
-            Gorakhpur&apos;s Trusted Scrap Pickup Service
+            Gorakhpur&apos;s Trusted Scrap Dealer
           </div>
 
-          {/* Heading */}
+          {/* Main SEO Heading */}
           <h1 className="mt-5 max-w-2xl text-4xl font-extrabold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
-            गोरखपुर का
+            Gorakhpur&apos;s
             <br />
             <span className="text-green-600">
-              सबसे भरोसेमंद
+              Trusted Scrap Dealer
             </span>
             <br />
-            Scrap Pickup
+            &amp; Scrap Pickup Service
           </h1>
 
           {/* Description */}
           <p className="mt-5 max-w-xl text-base leading-7 text-gray-600 sm:text-lg sm:leading-8 md:text-xl">
-            घर बैठे अपना पुराना अखबार, लोहा, प्लास्टिक, ई-वेस्ट और अन्य
-            कबाड़ बेचें।
+            Ghar baithe apna purana newspaper, books, cardboard, plastic, iron,
+            steel, copper, aluminium, e-waste aur anya kabad bechein.
             <br />
             <span className="font-semibold text-gray-800">
               Free Doorstep Pickup • Digital Weighing • Best Market Price •
@@ -55,7 +55,7 @@ export default function Hero() {
               className="inline-flex items-center gap-2 rounded-xl bg-green-600 px-5 py-3 font-bold text-white shadow-lg shadow-green-600/20 transition duration-300 hover:-translate-y-1 hover:bg-green-700 sm:px-8 sm:py-4"
             >
               <Truck size={20} />
-              Book Pickup
+              Book Scrap Pickup
             </a>
 
             <a
@@ -83,7 +83,7 @@ export default function Hero() {
 
             <div className="flex items-center gap-2 rounded-full border border-green-100 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm sm:px-4 sm:text-base">
               <Truck className="text-green-600" size={18} />
-              Free Pickup
+              Free Doorstep Pickup
             </div>
 
             <div className="flex items-center gap-2 rounded-full border border-green-100 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm sm:px-4 sm:text-base">
@@ -102,7 +102,6 @@ export default function Hero() {
         {/* RIGHT IMAGE CARD */}
         <div className="relative mx-auto w-full max-w-2xl lg:ml-auto">
 
-          {/* Decorative background */}
           <div className="absolute -inset-3 rounded-[2rem] bg-green-200/50 blur-2xl" />
 
           <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-2xl ring-1 ring-green-100">
@@ -111,7 +110,7 @@ export default function Hero() {
 
               <Image
                 src="/images/hero.png"
-                alt="Kabadi Baba scrap pickup service in Gorakhpur"
+                alt="Kabadi Baba scrap dealer and doorstep scrap pickup service in Gorakhpur"
                 fill
                 priority
                 sizes="(max-width: 1023px) 100vw, 50vw"
