@@ -26,20 +26,27 @@ export default function Hero() {
           </div>
 
           {/* Main SEO Heading */}
-          <h1 className="mt-5 max-w-2xl text-4xl font-extrabold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
-            Gorakhpur&apos;s
+          <h1 className="mt-5 max-w-3xl text-4xl font-extrabold leading-[1.08] tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-6xl">
+            Kabadi Baba
             <br />
             <span className="text-green-600">
-              Trusted Scrap Dealer
+              Sell Scrap Online
             </span>
             <br />
-            &amp; Scrap Pickup Service
+            <span className="text-gray-900">
+              Free Pickup in Gorakhpur
+            </span>
           </h1>
+
+          {/* Supporting Heading */}
+          <h2 className="mt-4 text-xl font-bold text-gray-800 sm:text-2xl">
+            Gorakhpur&apos;s Trusted Scrap Dealer &amp; Scrap Pickup Service
+          </h2>
 
           {/* Description */}
           <p className="mt-5 max-w-xl text-base leading-7 text-gray-600 sm:text-lg sm:leading-8 md:text-xl">
-            Ghar baithe apna purana newspaper, books, cardboard, plastic, iron,
-            steel, copper, aluminium, e-waste aur anya kabad bechein.
+            घर बैठे अपना पुराना newspaper, books, cardboard, plastic, iron,
+            steel, copper, aluminium, e-waste और अन्य कबाड़ बेचें।
             <br />
             <span className="font-semibold text-gray-800">
               Free Doorstep Pickup • Digital Weighing • Best Market Price •
@@ -83,7 +90,7 @@ export default function Hero() {
 
             <div className="flex items-center gap-2 rounded-full border border-green-100 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm sm:px-4 sm:text-base">
               <Truck className="text-green-600" size={18} />
-              Free Doorstep Pickup
+              Free Pickup
             </div>
 
             <div className="flex items-center gap-2 rounded-full border border-green-100 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm sm:px-4 sm:text-base">
@@ -102,6 +109,7 @@ export default function Hero() {
         {/* RIGHT IMAGE CARD */}
         <div className="relative mx-auto w-full max-w-2xl lg:ml-auto">
 
+          {/* Decorative background */}
           <div className="absolute -inset-3 rounded-[2rem] bg-green-200/50 blur-2xl" />
 
           <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-2xl ring-1 ring-green-100">
@@ -110,7 +118,7 @@ export default function Hero() {
 
               <Image
                 src="/images/hero.png"
-                alt="Kabadi Baba scrap dealer and doorstep scrap pickup service in Gorakhpur"
+                alt="Kabadi Baba scrap dealer and free scrap pickup service in Gorakhpur"
                 fill
                 priority
                 sizes="(max-width: 1023px) 100vw, 50vw"

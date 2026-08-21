@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = "https://kabadibaba.com";
+const siteUrl = "https://www.kabadibaba.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Kabadi Baba is Gorakhpur's trusted scrap dealer and scrap pickup service. Sell newspaper, cardboard, plastic, iron, steel, copper, aluminium and e-waste with free doorstep pickup, digital weighing and reliable payment.",
+    "Kabadi Baba is Gorakhpur's trusted scrap dealer and scrap pickup service. Sell newspaper, books, cardboard, plastic, iron, steel, copper, aluminium and e-waste with free doorstep pickup, digital weighing, best market price and reliable payment.",
 
   alternates: {
     canonical: "/",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "Kabadi Baba",
     title: "Kabadi Baba – Sell Scrap Online | Free Pickup in Gorakhpur",
     description:
-      "Gorakhpur's trusted scrap dealer and scrap pickup service with free doorstep pickup, digital weighing and reliable payment.",
+      "Sell your old scrap online in Gorakhpur with Kabadi Baba. Free doorstep pickup, digital weighing, best market price and reliable payment.",
     locale: "en_IN",
   },
 
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kabadi Baba – Sell Scrap Online | Free Pickup in Gorakhpur",
     description:
-      "Gorakhpur's trusted scrap dealer and scrap pickup service.",
+      "Sell scrap online in Gorakhpur with free doorstep pickup, digital weighing and best market price.",
   },
 };
 
@@ -52,7 +52,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+      </body>
     </html>
   );
 }
