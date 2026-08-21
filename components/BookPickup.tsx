@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { supabase } from "../lib/supabase";
+import { MapPin, Navigation } from "lucide-react";
 
 const SCRAP_ITEMS = [
   "Newspaper",
@@ -33,6 +34,13 @@ export default function BookPickup() {
   const [scrap, setScrap] = useState<string[]>([]);
   const [weight, setWeight] = useState("");
   const [pickupDate, setPickupDate] = useState("");
+
+  // Location
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [locationMessage, setLocationMessage] = useState("");
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -44,6 +52,58 @@ export default function BookPickup() {
       prev.includes(item)
         ? prev.filter((i) => i !== item)
         : [...prev, item]
+    );
+  };
+
+  // GET CURRENT LOCATION
+  const handleGetLocation = () => {
+    setLocationMessage("");
+    setErrorMessage("");
+
+    if (!navigator.geolocation) {
+      setLocationMessage("Your browser does not support location.");
+      return;
+    }
+
+    setLocationLoading(true);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        setLatitude(lat);
+        setLongitude(lng);
+
+        setLocationMessage(
+          "✓ Location captured successfully."
+        );
+
+        setLocationLoading(false);
+      },
+      (error) => {
+        console.error("Location error:", error);
+
+        let message =
+          "Unable to get your location. Please allow location permission.";
+
+        if (error.code === error.PERMISSION_DENIED) {
+          message =
+            "Location permission denied. Please allow location access in your browser.";
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+          message = "Your location is currently unavailable. Please try again.";
+        } else if (error.code === error.TIMEOUT) {
+          message = "Location request timed out. Please try again.";
+        }
+
+        setLocationMessage(message);
+        setLocationLoading(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 0,
+      }
     );
   };
 
@@ -99,15 +159,19 @@ export default function BookPickup() {
           scrap_type: scrap.join(", "),
           weight: numericWeight,
           pickup_date: pickupDate || today,
+          latitude,
+          longitude,
           status: "pending",
         },
       ]);
 
       if (error) {
         console.error("Booking error:", error);
+
         setErrorMessage(
           "Unable to submit your pickup request. Please try again."
         );
+
         return;
       }
 
@@ -121,8 +185,12 @@ export default function BookPickup() {
       setScrap([]);
       setWeight("");
       setPickupDate("");
+      setLatitude(null);
+      setLongitude(null);
+      setLocationMessage("");
     } catch (error) {
       console.error("Unexpected booking error:", error);
+
       setErrorMessage(
         "Something went wrong. Please try again."
       );
@@ -158,6 +226,7 @@ export default function BookPickup() {
           onSubmit={handleSubmit}
           className="space-y-7 rounded-3xl bg-white p-5 shadow-lg sm:p-8"
         >
+
           {/* CUSTOMER DETAILS */}
           <div>
             <h3 className="mb-4 text-lg font-bold text-gray-900">
@@ -166,6 +235,7 @@ export default function BookPickup() {
 
             <div className="grid gap-4 sm:grid-cols-2">
 
+              {/* NAME */}
               <div>
                 <label
                   htmlFor="booking-name"
@@ -187,6 +257,7 @@ export default function BookPickup() {
                 />
               </div>
 
+              {/* MOBILE */}
               <div>
                 <label
                   htmlFor="booking-mobile"
@@ -214,6 +285,7 @@ export default function BookPickup() {
                 />
               </div>
 
+              {/* ADDRESS */}
               <div className="sm:col-span-2">
                 <label
                   htmlFor="booking-address"
@@ -233,6 +305,73 @@ export default function BookPickup() {
                   className="w-full resize-none rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:bg-gray-100"
                 />
               </div>
+
+              {/* LOCATION */}
+              <div className="sm:col-span-2">
+                <div className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4">
+
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100">
+                        <MapPin className="h-6 w-6 text-emerald-600" />
+                      </div>
+
+                      <div>
+                        <h4 className="font-bold text-gray-900">
+                          Pickup Location
+                        </h4>
+
+                        <p className="mt-1 text-xs leading-5 text-gray-600 sm:text-sm">
+                          अपने pickup location को आसानी से share करें।
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleGetLocation}
+                      disabled={loading || locationLoading}
+                      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      <Navigation className="h-5 w-5" />
+
+                      {locationLoading
+                        ? "Getting Location..."
+                        : "Use My Current Location"}
+                    </button>
+
+                  </div>
+
+                  {locationMessage && (
+                    <div
+                      className={`mt-3 rounded-xl px-3 py-2 text-xs font-medium sm:text-sm ${
+                        latitude !== null && longitude !== null
+                          ? "bg-emerald-100 text-emerald-800"
+                          : "bg-amber-100 text-amber-800"
+                      }`}
+                    >
+                      {locationMessage}
+                    </div>
+                  )}
+
+                  {latitude !== null && longitude !== null && (
+                    <div className="mt-3 rounded-xl bg-white p-3 text-xs text-gray-600">
+                      <span className="font-semibold text-gray-800">
+                        Location captured:
+                      </span>{" "}
+                      {latitude.toFixed(6)}, {longitude.toFixed(6)}
+                    </div>
+                  )}
+
+                  <p className="mt-3 text-[11px] leading-5 text-gray-500">
+                    Location sharing is optional. Your address is still required
+                    for pickup.
+                  </p>
+
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -323,6 +462,7 @@ export default function BookPickup() {
                 className="min-h-[50px] w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 disabled:bg-gray-100"
               />
             </div>
+
           </div>
 
           {/* ERROR */}
@@ -357,6 +497,7 @@ export default function BookPickup() {
           <p className="text-center text-xs leading-5 text-gray-500">
             Free doorstep pickup • Transparent weighing • Best market price
           </p>
+
         </form>
       </div>
     </section>
