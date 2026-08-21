@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "Kabadi Baba – Scrap Dealer in Gorakhpur | Scrap Pickup",
+    default: "Kabadi Baba – Sell Scrap Online | Free Pickup in Gorakhpur",
     template: "%s | Kabadi Baba",
   },
 
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Kabadi Baba",
-    title: "Kabadi Baba – Scrap Dealer in Gorakhpur | Scrap Pickup",
+    title: "Kabadi Baba – Sell Scrap Online | Free Pickup in Gorakhpur",
     description:
       "Gorakhpur's trusted scrap dealer and scrap pickup service with free doorstep pickup, digital weighing and reliable payment.",
     locale: "en_IN",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Kabadi Baba – Scrap Dealer in Gorakhpur | Scrap Pickup",
+    title: "Kabadi Baba – Sell Scrap Online | Free Pickup in Gorakhpur",
     description:
       "Gorakhpur's trusted scrap dealer and scrap pickup service.",
   },
