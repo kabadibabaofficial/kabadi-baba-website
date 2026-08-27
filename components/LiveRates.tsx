@@ -85,7 +85,6 @@ export default function LiveRates() {
     <section id="rates" className="bg-gray-50 py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
 
-        {/* HEADER */}
         <div className="mb-8 text-center sm:mb-10">
           <span className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700">
             Today&apos;s Scrap Rates
@@ -101,7 +100,6 @@ export default function LiveRates() {
           </p>
         </div>
 
-        {/* SEARCH */}
         <div className="mx-auto mb-6 max-w-2xl">
           <div className="relative">
             <input
@@ -118,7 +116,6 @@ export default function LiveRates() {
           </div>
         </div>
 
-        {/* CATEGORY FILTER */}
         <div className="mb-8 flex gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center">
           {categories.map((category) => {
             const active = activeCategory === category;
@@ -140,7 +137,6 @@ export default function LiveRates() {
           })}
         </div>
 
-        {/* LOADING */}
         {loading && (
           <div className="rounded-2xl bg-white p-10 text-center shadow-sm">
             <div className="text-lg font-semibold text-gray-700">
@@ -153,7 +149,6 @@ export default function LiveRates() {
           </div>
         )}
 
-        {/* ERROR */}
         {!loading && errorMessage && (
           <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center">
             <div className="text-lg font-bold text-red-700">
@@ -166,10 +161,8 @@ export default function LiveRates() {
           </div>
         )}
 
-        {/* RESULTS */}
         {!loading && !errorMessage && (
           <>
-            {/* RESULT COUNT */}
             <div className="mb-4 flex items-center justify-between">
               <p className="text-sm font-medium text-gray-500">
                 {filteredRates.length} items available
@@ -186,7 +179,6 @@ export default function LiveRates() {
               )}
             </div>
 
-            {/* RATE CARDS */}
             {filteredRates.length > 0 ? (
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
                 {filteredRates.map((item) => (
@@ -240,7 +232,6 @@ export default function LiveRates() {
               </div>
             )}
 
-            {/* DISCLAIMER */}
             <div className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 text-center">
               <p className="text-xs leading-5 text-amber-800 sm:text-sm">
                 <strong>Note:</strong> Rates shown are indicative. Final rate
@@ -250,7 +241,6 @@ export default function LiveRates() {
             </div>
           </>
         )}
-
       </div>
     </section>
   );

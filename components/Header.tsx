@@ -43,9 +43,11 @@ export default function Header() {
           onClick={closeMenu}
           className="flex items-center gap-2 sm:gap-3"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-600 text-xl text-white shadow-md sm:h-14 sm:w-14 sm:rounded-2xl sm:text-3xl">
-            ♻️
-          </div>
+          <img
+            src="/logo/kabadi-baba-logo.png"
+            alt="Kabadi Baba Logo"
+            className="h-10 w-10 rounded-xl object-cover shadow-md sm:h-14 sm:w-14 sm:rounded-2xl"
+          />
 
           <div>
             <h1 className="text-lg font-extrabold tracking-tight text-gray-900 sm:text-2xl">

@@ -28,6 +28,33 @@ export const metadata: Metadata = {
     follow: true,
   },
 
+  icons: {
+    icon: [
+      {
+        url: "/icons/favicon.ico",
+        sizes: "any",
+      },
+      {
+        url: "/icons/kabadi-baba-icon-192.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
+      {
+        url: "/icons/kabadi-baba-icon-512.png",
+        type: "image/png",
+        sizes: "512x512",
+      },
+    ],
+
+    shortcut: "/icons/favicon.ico",
+
+    apple: {
+      url: "/icons/kabadi-baba-apple-180.png",
+      sizes: "180x180",
+      type: "image/png",
+    },
+  },
+
   openGraph: {
     type: "website",
     url: siteUrl,
@@ -58,6 +85,7 @@ export default function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=G-51MHTVV0K7"
           strategy="afterInteractive"
         />
+
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -66,6 +94,7 @@ export default function RootLayout({
             gtag("config", "G-51MHTVV0K7");
           `}
         </Script>
+
         {children}
       </body>
     </html>
