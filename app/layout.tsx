@@ -9,12 +9,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "Kabadi Baba - Sell Scrap Online | Free Pickup in Gorakhpur",
+    default:
+      "Kabadi Baba Gorakhpur | Sell Scrap Online | Free Doorstep Pickup",
     template: "%s | Kabadi Baba",
   },
 
   description:
-    "Kabadi Baba is Gorakhpur's trusted scrap dealer and scrap pickup service. Sell newspaper, books, cardboard, plastic, iron, steel, copper, aluminium and e-waste with free doorstep pickup, digital weighing, best market price and reliable payment.",
+    "Free doorstep scrap pickup in Gorakhpur. Best market rates, digital weighing and instant UPI payment. Sell newspaper, iron, plastic and e-waste. Book your pickup now - +91 7377788810",
 
   alternates: {
     canonical: "/",
@@ -60,17 +61,35 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Kabadi Baba",
-    title: "Kabadi Baba - Sell Scrap Online | Free Pickup in Gorakhpur",
+
+    title:
+      "Kabadi Baba Gorakhpur | Sell Scrap Online | Free Doorstep Pickup",
+
     description:
-      "Sell your old scrap online in Gorakhpur with Kabadi Baba. Free doorstep pickup, digital weighing, best market price and reliable payment.",
+      "Free doorstep scrap pickup in Gorakhpur. Best market rates, digital weighing and instant UPI payment. Sell newspaper, iron, plastic and e-waste.",
+
     locale: "en_IN",
+
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Kabadi Baba - Gorakhpur Scrap Dealer",
+      },
+    ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Kabadi Baba - Sell Scrap Online | Free Pickup in Gorakhpur",
+
+    title:
+      "Kabadi Baba Gorakhpur | Sell Scrap Online | Free Doorstep Pickup",
+
     description:
-      "Sell scrap online in Gorakhpur with free doorstep pickup, digital weighing and best market price.",
+      "Sell scrap online in Gorakhpur with free doorstep pickup, digital weighing and best market rates.",
+
+    images: ["/og-image.jpg"],
   },
 };
 
