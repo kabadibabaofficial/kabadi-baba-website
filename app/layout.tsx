@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
+import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 
 const siteUrl = "https://www.kabadibaba.com";
 
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "Kabadi Baba – Sell Scrap Online | Free Pickup in Gorakhpur",
+    default: "Kabadi Baba - Sell Scrap Online | Free Pickup in Gorakhpur",
     template: "%s | Kabadi Baba",
   },
 
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Kabadi Baba",
-    title: "Kabadi Baba – Sell Scrap Online | Free Pickup in Gorakhpur",
+    title: "Kabadi Baba - Sell Scrap Online | Free Pickup in Gorakhpur",
     description:
       "Sell your old scrap online in Gorakhpur with Kabadi Baba. Free doorstep pickup, digital weighing, best market price and reliable payment.",
     locale: "en_IN",
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Kabadi Baba – Sell Scrap Online | Free Pickup in Gorakhpur",
+    title: "Kabadi Baba - Sell Scrap Online | Free Pickup in Gorakhpur",
     description:
       "Sell scrap online in Gorakhpur with free doorstep pickup, digital weighing and best market price.",
   },
@@ -81,6 +82,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-full flex flex-col">
+        <LocalBusinessSchema />
+
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-51MHTVV0K7"
           strategy="afterInteractive"
