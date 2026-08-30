@@ -44,7 +44,12 @@ export default function BookingRow({ booking }: Props) {
     if (status === booking.status) return;
 
     startTransition(async () => {
-      await updateBookingStatus(booking.id, status);
+      try {
+        await updateBookingStatus(booking.id, status);
+      } catch (error) {
+        console.error("Status update error:", error);
+        alert("Status update nahi ho saka.");
+      }
     });
   };
 
@@ -56,50 +61,63 @@ export default function BookingRow({ booking }: Props) {
     if (!confirmed) return;
 
     startTransition(async () => {
-      await deleteBooking(booking.id);
+      try {
+        await deleteBooking(booking.id);
+      } catch (error) {
+        console.error("Delete booking error:", error);
+        alert("Booking delete nahi ho saki.");
+      }
     });
   };
 
-  // GPS location available?
   const hasLocation =
     booking.latitude !== null &&
     booking.longitude !== null &&
     booking.latitude !== undefined &&
     booking.longitude !== undefined;
 
-  // Exact GPS location OR address-based Google Maps search
   const mapsUrl = hasLocation
     ? `https://www.google.com/maps?q=${booking.latitude},${booking.longitude}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
         booking.address
       )}`;
 
+  const whatsappNumber = booking.mobile.replace(/\D/g, "");
+
   return (
     <tr className="border-b bg-white transition hover:bg-gray-50">
+
+      {/* CUSTOMER */}
       <td className="p-3 font-medium text-gray-900">
         {booking.full_name}
       </td>
 
+      {/* MOBILE */}
       <td className="p-3 text-gray-700">
         {booking.mobile}
       </td>
 
+      {/* ADDRESS */}
       <td className="p-3 text-gray-700">
         {booking.address}
       </td>
 
+      {/* SCRAP */}
       <td className="p-3 text-gray-700">
         {booking.scrap_type}
       </td>
 
+      {/* WEIGHT */}
       <td className="p-3 text-gray-700">
         {booking.weight}
       </td>
 
+      {/* PICKUP DATE */}
       <td className="p-3 text-gray-700">
         {booking.pickup_date}
       </td>
 
+      {/* STATUS */}
       <td className="p-3">
         <select
           value={booking.status}
@@ -120,27 +138,28 @@ export default function BookingRow({ booking }: Props) {
         </select>
       </td>
 
+      {/* ACTIONS */}
       <td className="p-3">
         <div className="flex flex-wrap gap-2">
 
           {/* CALL */}
           <a
             href={`tel:${booking.mobile}`}
-            aria-label={`Call ${booking.full_name}`}
             title="Call customer"
-            className="rounded bg-blue-500 px-2 py-1 text-white transition hover:bg-blue-600"
+            aria-label={`Call ${booking.full_name}`}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-blue-500 text-lg text-white shadow-sm transition hover:bg-blue-600"
           >
             📞
           </a>
 
           {/* WHATSAPP */}
           <a
-            href={`https://wa.me/91${booking.mobile}`}
+            href={`https://wa.me/91${whatsappNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`WhatsApp ${booking.full_name}`}
             title="WhatsApp customer"
-            className="rounded bg-green-500 px-2 py-1 text-white transition hover:bg-green-600"
+            aria-label={`WhatsApp ${booking.full_name}`}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-green-500 text-lg text-white shadow-sm transition hover:bg-green-600"
           >
             💬
           </a>
@@ -150,15 +169,25 @@ export default function BookingRow({ booking }: Props) {
             href={mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`View location of ${booking.full_name}`}
             title={
               hasLocation
-                ? "Open exact customer GPS location"
-                : "Open customer address in Google Maps"
+                ? "Open exact customer location"
+                : "Open address in Google Maps"
             }
-            className="rounded bg-emerald-600 px-2 py-1 text-white transition hover:bg-emerald-700"
+            aria-label={`View location of ${booking.full_name}`}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-600 text-lg text-white shadow-sm transition hover:bg-emerald-700"
           >
             📍
+          </a>
+
+          {/* INVOICE */}
+          <a
+            href={`/admin/invoice?booking=${booking.id}`}
+            title="Create invoice"
+            aria-label={`Create invoice for ${booking.full_name}`}
+            className="inline-flex h-9 items-center justify-center rounded-lg bg-purple-600 px-3 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-700"
+          >
+            Invoice
           </a>
 
           {/* DELETE */}
@@ -166,11 +195,11 @@ export default function BookingRow({ booking }: Props) {
             type="button"
             onClick={removeBooking}
             disabled={isPending}
-            aria-label={`Delete ${booking.full_name}`}
             title="Delete booking"
-            className="rounded bg-red-500 px-2 py-1 text-white transition hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-60"
+            aria-label={`Delete ${booking.full_name}`}
+            className="inline-flex h-9 items-center justify-center rounded-lg bg-red-600 px-3 text-sm font-semibold text-white shadow-sm transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            🗑️
+            🗑️ Delete
           </button>
 
         </div>
