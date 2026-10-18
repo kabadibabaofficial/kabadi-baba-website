@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 :root {
@@ -8,6 +9,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+}
+
+@theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -23,4 +27,142 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== Kabadi Baba - Call Now button ===== */
+
+@keyframes kabadi-phone-ring {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30%, 50% { transform: rotate(-13deg); }
+  20%, 40%, 60% { transform: rotate(13deg); }
+  70% { transform: rotate(0deg); }
+}
+
+@keyframes kabadi-call-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.16);
+  }
+}
+
+@keyframes kabadi-wave {
+  0%, 100% {
+    opacity: 0.35;
+    transform: translateY(-50%) scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.08);
+  }
+}
+
+.call-now-pulse {
+  position: relative;
+  overflow: visible;
+  animation: kabadi-call-pulse 2s ease-out infinite;
+}
+
+.call-phone-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+}
+
+.call-ring-icon {
+  position: relative;
+  z-index: 1;
+  animation: kabadi-phone-ring 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Receiver ke left aur right 2-2 waves */
+
+.call-wave {
+  position: absolute;
+  top: 50%;
+  display: block;
+  border-color: #16a34a;
+  border-style: solid;
+  opacity: 0.85;
+  transform: translateY(-50%);
+  animation: kabadi-wave 1.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.call-wave-left {
+  border-width: 0 0 0 2.5px;
+  border-radius: 50% 0 0 50%;
+}
+
+.call-wave-right {
+  border-width: 0 2.5px 0 0;
+  border-radius: 0 50% 50% 0;
+}
+
+.call-wave-left-outer,
+.call-wave-right-outer {
+  width: 12px;
+  height: 30px;
+  animation-delay: 0.15s;
+}
+
+.call-wave-left-inner,
+.call-wave-right-inner {
+  width: 7px;
+  height: 20px;
+}
+
+.call-wave-left-outer { left: -7px; }
+.call-wave-left-inner { left: -1px; }
+.call-wave-right-inner { right: -1px; }
+.call-wave-right-outer { right: -7px; }
+
+/* Receiver ke upar 3 ringing lines */
+
+.call-ray {
+  position: absolute;
+  display: block;
+  width: 3px;
+  height: 8px;
+  border-radius: 3px;
+  background: #16a34a;
+  transform-origin: center bottom;
+  animation: kabadi-wave 1.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.call-ray-center {
+  left: 14px;
+  top: -7px;
+}
+
+.call-ray-left {
+  left: 7px;
+  top: -5px;
+  transform: rotate(-38deg);
+  animation-delay: 0.1s;
+}
+
+.call-ray-right {
+  right: 7px;
+  top: -5px;
+  transform: rotate(38deg);
+  animation-delay: 0.2s;
+}
+
+/* Motion kam karne ki setting */
+
+@media (prefers-reduced-motion: reduce) {
+  .call-ring-icon,
+  .call-now-pulse,
+  .call-wave,
+  .call-ray {
+    animation: none;
+  }
 }
