@@ -44,8 +44,6 @@ const popularOrder = [
   "E-Waste",
   "Refrigerator",
   "Washing Machine",
-  "Steel",
-  "PET Bottle",
 ];
 
 const scrapImages: Record<string, string> = {
@@ -62,7 +60,6 @@ const scrapImages: Record<string, string> = {
 
   // Plastic
   "Plastic Bottle": "/images/scrap-rates/plastic-bottle.webp",
-  "PET Bottle": "/images/scrap-rates/15-pet-bottle.png",
   Plastic: "/images/scrap-rates/plastic.webp",
 
   // Metal
@@ -73,7 +70,7 @@ const scrapImages: Record<string, string> = {
   "Casting Aluminium": "/images/scrap-rates/26-casting-aluminium.png",
   "MS Drum (50 Litre)": "/images/scrap-rates/27-ms-drum-50-litre.png",
   Tin: "/images/scrap-rates/28-tin.png",
-  Steel: "/images/scrap-rates/steel-scrap-new.png",
+  Steel: "/images/scrap-rates/29-steel.png",
   Iron: "/images/scrap-rates/iron.webp",
   Aluminium: "/images/scrap-rates/aluminium.webp",
   Copper: "/images/scrap-rates/copper.webp",
@@ -104,28 +101,6 @@ const scrapImages: Record<string, string> = {
   Geyser: "/images/scrap-rates/45_Geyser.png",
   "Cooler (Plastic/Fibre)": "/images/scrap-rates/46_Cooler_Plastic_Fibre.png",
   "Cooler (Tin)": "/images/scrap-rates/47_Cooler_Tin.png",
-  // Plastic
-  "Plastic Drum (200 Litre)": "/images/scrap-rates/01-plastic-drum-200-litre.png",
-  "Plastic Jar (15 Litre)": "/images/scrap-rates/02-plastic-jar-15-litre.png",
-  "Mix Plastic": "/images/scrap-rates/03-mix-plastic.png",
-  "Plastic Can (50 Litre)": "/images/scrap-rates/04-plastic-can-50-litre.png",
-  "Plastic (PP) Bags": "/images/scrap-rates/05-plastic-pp-bags.png",
-  "Polythene Bags (LD)": "/images/scrap-rates/06-polythene-bags-ld.png",
-  "Water Tank (Sintex)": "/images/scrap-rates/07-water-tank-sintex.png",
-  "Plastic Jar (5 Litre)": "/images/scrap-rates/08-plastic-jar-5-litre.png",
-  "PVC Pipe": "/images/scrap-rates/09-pvc-pipe.png",
-  "Packaging Film": "/images/scrap-rates/10-packaging-film.png",
-  "Plastic Can (25 Litre)": "/images/scrap-rates/11-plastic-can-25-litre.png",
-  "Soft Plastic": "/images/scrap-rates/12-soft-plastic.png",
-  "Hard Plastic": "/images/scrap-rates/13-hard-plastic.png",
-  "Polythene Bags (HM)": "/images/scrap-rates/14-polythene-bags-hm.png",
-  // Other
-  "Tyre": "/images/scrap-rates/48_Tyre.png",
-  "Milk Covers": "/images/scrap-rates/49_Milk_Covers.png",
-  "Bike": "/images/scrap-rates/50_Bike.png",
-  "Fibre": "/images/scrap-rates/51_Fibre.png",
-  "Other Scrap": "/images/scrap-rates/52_Other_Scrap.png",
-  "Car": "/images/scrap-rates/53_Car.png",
   "Washing Machine": "/images/scrap-rates/washing-machine.webp",
 };
 
@@ -139,7 +114,7 @@ export default function LiveRates() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(true);
 
   useEffect(() => {
     const loadRates = async () => {
@@ -350,9 +325,11 @@ export default function LiveRates() {
                         {scrapImages[item.name] ? (
                           <Image
                             src={scrapImages[item.name]}
-                            alt={item.name}
+                            alt={`${item.name} scrap`}
                             width={200}
                             height={200}
+                            loading="lazy"
+                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                             className="h-full w-full object-contain transition-transform duration-200 group-hover:scale-105"
                           />
                         ) : (
@@ -406,21 +383,6 @@ export default function LiveRates() {
                 </p>
               </div>
             )}
-
-            {/* View All */}
-            {activeCategory === "All" &&
-              !search &&
-              rates.length > filteredRates.length && (
-                <div className="mt-8 flex justify-center">
-                  <button
-                    type="button"
-                    onClick={() => setShowAll(true)}
-                    className="rounded-xl border border-emerald-600 bg-white px-6 py-3 text-sm font-bold text-emerald-700 shadow-sm transition hover:bg-emerald-600 hover:text-white"
-                  >
-                    View All Rates ({rates.length})
-                  </button>
-                </div>
-              )}
 
             {/* Note */}
             <div className="mt-8 rounded-2xl border border-amber-100 bg-amber-50 p-4 text-center">
