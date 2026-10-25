@@ -61,6 +61,21 @@ const scrapImages: Record<string, string> = {
   // Plastic
   "Plastic Bottle": "/images/scrap-rates/plastic-bottle.webp",
   Plastic: "/images/scrap-rates/plastic.webp",
+  "Plastic Drum (200 Litre)": "/images/scrap-rates/01-plastic-drum-200-litre.png",
+  "Plastic Jar (15 Litre)": "/images/scrap-rates/02-plastic-jar-15-litre.png",
+  "Mix Plastic": "/images/scrap-rates/03-mix-plastic.png",
+  "Plastic Can (50 Litre)": "/images/scrap-rates/04-plastic-can-50-litre.png",
+  "Plastic (PP) Bags": "/images/scrap-rates/05-plastic-pp-bags.png",
+  "Polythene Bags (LD)": "/images/scrap-rates/06-polythene-bags-ld.png",
+  "Water Tank (Sintex)": "/images/scrap-rates/07-water-tank-sintex.png",
+  "Plastic Jar (5 Litre)": "/images/scrap-rates/08-plastic-jar-5-litre.png",
+  "PVC Pipe": "/images/scrap-rates/09-pvc-pipe.png",
+  "Packaging Film": "/images/scrap-rates/10-packaging-film.png",
+  "Plastic Can (25 Litre)": "/images/scrap-rates/11-plastic-can-25-litre.png",
+  "Soft Plastic": "/images/scrap-rates/12-soft-plastic.png",
+  "Hard Plastic": "/images/scrap-rates/13-hard-plastic.png",
+  "Polythene Bags (HM)": "/images/scrap-rates/14-polythene-bags-hm.png",
+  "PET Bottle": "/images/scrap-rates/15-pet-bottle.png",
 
   // Metal
   "MS Drum (200 Litre)": "/images/scrap-rates/22-ms-drum-200-litre (2).png",
@@ -70,7 +85,7 @@ const scrapImages: Record<string, string> = {
   "Casting Aluminium": "/images/scrap-rates/26-casting-aluminium.png",
   "MS Drum (50 Litre)": "/images/scrap-rates/27-ms-drum-50-litre.png",
   Tin: "/images/scrap-rates/28-tin.png",
-  Steel: "/images/scrap-rates/29-steel.png",
+  Steel: "/images/scrap-rates/steel-scrap-new.png",
   Iron: "/images/scrap-rates/iron.webp",
   Aluminium: "/images/scrap-rates/aluminium.webp",
   Copper: "/images/scrap-rates/copper.webp",
@@ -102,6 +117,14 @@ const scrapImages: Record<string, string> = {
   "Cooler (Plastic/Fibre)": "/images/scrap-rates/46_Cooler_Plastic_Fibre.png",
   "Cooler (Tin)": "/images/scrap-rates/47_Cooler_Tin.png",
   "Washing Machine": "/images/scrap-rates/washing-machine.webp",
+
+  // Other
+  Tyre: "/images/scrap-rates/48_Tyre.png",
+  "Milk Covers": "/images/scrap-rates/49_Milk_Covers.png",
+  Bike: "/images/scrap-rates/50_Bike.png",
+  Fibre: "/images/scrap-rates/51_Fibre.png",
+  "Other Scrap": "/images/scrap-rates/52_Other_Scrap.png",
+  Car: "/images/scrap-rates/53_Car.png",
 };
 
 const rupee = "₹";
